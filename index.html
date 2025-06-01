@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ryze Responsive Webpage (with No‐Profile Icons)</title>
+  <style>
+    /* ─── Root Colors ───────────────────────────────────────────────────────── */
+    :root {
+      --primary-blue: #007BFF;
+      --primary-orange: #FFA500;
+      --background: #F4F6FA;
+      --light-grey: #E5E7EB;
+      --dark-grey: #333333;
+      --max-content-width: 1000px;
+      --gutter: 16px;
+    }
+
+    /* ─── Global Resets & Typography ───────────────────────────────────────── */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    html, body {
+      height: 100%;
+    }
+    body {
+      background-color: var(--background);
+      color: var(--dark-grey);
+      line-height: 1.5;
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* ─── LAYOUT CONTAINER ────────────────────────────────────────────────────
+       We center content on wide screens with a max‐width, but let it fill on narrow screens. */
+    .wrapper {
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: var(--gutter);
+      padding-right: var(--gutter);
+      max-width: var(--max-content-width);
+    }
+
+    /* ─── HEADER ───────────────────────────────────────────────────────────────── */
+    header {
+      background-color: var(--primary-blue);
+      color: white;
+      padding: 16px var(--gutter);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+    .menu-icon {
+      width: 24px;
+      height: 24px;
+      cursor: pointer;
+    }
+
+    /* ─── MAIN CONTENT AREA ───────────────────────────────────────────────────── */
+    main {
+      background-color: white;
+      margin-top: 1px; /* tiny line to distinguish from header */
+      padding: 24px var(--gutter);
+    }
+
+    /* ─ Stories Ribbon ───────────────────────────────────────────────────── */
+    .stories {
+      display: flex;
+      overflow-x: auto;
+      padding-bottom: 12px;
+      margin-bottom: 24px;
+    }
+    .story {
+      flex: 0 0 auto;
+      width: 60px;
+      margin-right: 12px;
+      text-align: center;
+    }
+    .story .avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 3px solid var(--primary-orange);
+      object-fit: cover;
+    }
+    .story .name {
+      font-size: 0.75rem;
+      color: var(--dark-grey);
+      margin-top: 6px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* ─ Featured Expert Card ───────────────────────────────────────────────── */
+    .expert-card {
+      display: flex;
+      align-items: center;
+      background-color: white;
+      border: 1px solid var(--light-grey);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 32px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    .expert-photo {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-right: 16px;
+    }
+    .expert-info {
+      flex: 1;
+    }
+    .expert-name {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: var(--dark-grey);
+    }
+    .expert-strategy {
+      font-size: 0.9rem;
+      color: var(--dark-grey);
+      margin-bottom: 10px;
+    }
+    .follow-btn {
+      background-color: var(--primary-orange);
+      color: white;
+      border: none;
+      border-radius: 20px;
+      padding: 8px 18px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+    .follow-btn:hover {
+      background-color: #e69500;
+    }
+
+    /* ─ Connections Grid ────────────────────────────────────────────────────── */
+    .connections-section {
+      margin-bottom: 48px;
+    }
+    .connections-header {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+      color: var(--dark-grey);
+    }
+    .connections-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 20px;
+    }
+    .friend-card {
+      background-color: white;
+      border: 1px solid var(--light-grey);
+      border-radius: 12px;
+      padding: 12px;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+    .friend-card .avatar {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 0 auto 8px;
+    }
+    .friend-name {
+      font-size: 0.95rem;
+      font-weight: 500;
+      margin-bottom: 4px;
+      color: var(--dark-grey);
+    }
+    .status {
+      font-size: 0.8rem;
+      color: gray;
+      margin-bottom: 8px;
+    }
+    .connect-btn {
+      background-color: var(--primary-blue);
+      color: white;
+      border: none;
+      border-radius: 16px;
+      padding: 6px 12px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+    .connect-btn:hover {
+      background-color: #006ae6;
+    }
+
+    /* ─── BOTTOM NAVIGATION BAR ─────────────────────────────────────────────── */
+    footer {
+      background-color: white;
+      border-top: 1px solid var(--light-grey);
+      position: sticky;
+      bottom: 0;
+      width: 100%;
+      padding: 8px 0;
+      box-shadow: 0 -1px 4px rgba(0,0,0,0.05);
+    }
+    .bottom-nav {
+      max-width: var(--max-content-width);
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+    .nav-icon {
+      width: 28px;
+      height: 28px;
+      opacity: 0.6;
+      cursor: pointer;
+      transition: opacity 0.2s ease;
+    }
+    .nav-icon.active {
+      opacity: 1;
+      filter: brightness(0) saturate(100%) invert(61%) sepia(85%) saturate(633%) hue-rotate(187deg) brightness(98%) contrast(103%);
+    }
+    .nav-icon:hover {
+      opacity: 1;
+    }
+
+    /* ─── RESPONSIVE TWEAKS ─────────────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      main {
+        padding: 20px var(--gutter);
+      }
+      .expert-card {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .expert-photo {
+        margin-bottom: 12px;
+        margin-right: 0;
+      }
+    }
+    @media (max-width: 480px) {
+      header {
+        padding: 12px var(--gutter);
+      }
+      .logo {
+        font-size: 1.3rem;
+      }
+      .stories {
+        margin-bottom: 18px;
+      }
+      .connections-header {
+        font-size: 1.1rem;
+      }
+      .connections-grid {
+        gap: 16px;
+      }
+      .friend-card .avatar {
+        width: 48px;
+        height: 48px;
+      }
+      .friend-name {
+        font-size: 0.9rem;
+      }
+      .status {
+        font-size: 0.75rem;
+      }
+      .connect-btn {
+        padding: 5px 10px;
+        font-size: 0.75rem;
+      }
+      .nav-icon {
+        width: 24px;
+        height: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── HEADER ───────────────────────────────────────────────────────────── -->
+  <header>
+    <div class="wrapper" style="display: flex; align-items: center; justify-content: space-between;">
+      <div class="logo">Ryze</div>
+      <img src="https://img.icons8.com/ios-filled/50/ffffff/menu--v1.png"
+           alt="Menu" class="menu-icon" />
+    </div>
+  </header>
+
+  <!-- ─── MAIN CONTENT ─────────────────────────────────────────────────────── -->
+  <main class="wrapper">
+    <!-- Expert Stories Ribbon -->
+    <section class="stories">
+      <div class="story">
+        <img src="https://via.placeholder.com/60" alt="Expert A" class="avatar" />
+        <div class="name">Expert A</div>
+      </div>
+      <div class="story">
+        <img src="https://via.placeholder.com/60" alt="Expert B" class="avatar" />
+        <div class="name">Expert B</div>
+      </div>
+      <div class="story">
+        <img src="https://via.placeholder.com/60" alt="Expert C" class="avatar" />
+        <div class="name">Expert C</div>
+      </div>
+      <div class="story">
+        <img src="https://via.placeholder.com/60" alt="Expert D" class="avatar" />
+        <div class="name">Expert D</div>
+      </div>
+      <!-- Add more <div class="story">…</div> as needed -->
+    </section>
+
+    <!-- Featured Expert Card -->
+    <section class="expert-card">
+      <img src="https://via.placeholder.com/64" alt="Jane Doe" class="expert-photo" />
+      <div class="expert-info">
+        <div class="expert-name">Jane Doe</div>
+        <div class="expert-strategy">Growth &amp; Tech Stocks</div>
+        <button class="follow-btn">Follow</button>
+      </div>
+    </section>
+
+    <!-- Connections Grid (with grey “no‐profile” avatars) -->
+    <section class="connections-section">
+      <div class="connections-header">Connections</div>
+      <div class="connections-grid">
+        <!-- Here, each friend‐card uses a grey silhouette as the “no‐profile” image -->
+        <div class="friend-card">
+          <img src="https://img.icons8.com/ios-glyphs/90/CCCCCC/user-male-circle.png"
+               alt="No Profile" class="avatar" />
+          <div class="friend-name">John</div>
+          <div class="status">Watching AAPL</div>
+          <button class="connect-btn">Connect</button>
+        </div>
+        <div class="friend-card">
+          <img src="https://img.icons8.com/ios-glyphs/90/CCCCCC/user-male-circle.png"
+               alt="No Profile" class="avatar" />
+          <div class="friend-name">Sara</div>
+          <div class="status">Following BTC</div>
+          <button class="connect-btn">Connect</button>
+        </div>
+        <div class="friend-card">
+          <img src="https://img.icons8.com/ios-glyphs/90/CCCCCC/user-male-circle.png"
+               alt="No Profile" class="avatar" />
+          <div class="friend-name">Mike</div>
+          <div class="status">Invested in GOOG</div>
+          <button class="connect-btn">Connect</button>
+        </div>
+        <div class="friend-card">
+          <img src="https://img.icons8.com/ios-glyphs/90/CCCCCC/user-male-circle.png"
+               alt="No Profile" class="avatar" />
+          <div class="friend-name">Anna</div>
+          <div class="status">Reading TSLA News</div>
+          <button class="connect-btn">Connect</button>
+        </div>
+        <div class="friend-card">
+          <img src="https://img.icons8.com/ios-glyphs/90/CCCCCC/user-male-circle.png"
+               alt="No Profile" class="avatar" />
+          <div class="friend-name">Carlos</div>
+          <div class="status">Tracking ETH</div>
+          <button class="connect-btn">Connect</button>
+        </div>
+        <!-- Add more <div class="friend-card">…</div> as needed -->
+      </div>
+    </section>
+  </main>
+
+  <!-- ─── BOTTOM NAVIGATION BAR ─────────────────────────────────────────────── -->
+  <footer>
+    <div class="bottom-nav">
+      <img src="https://img.icons8.com/ios-filled/50/000000/home.png"
+           alt="Home" class="nav-icon active" />
+      <img src="https://img.icons8.com/ios-filled/50/000000/search.png"
+           alt="Search" class="nav-icon" />
+      <img src="https://img.icons8.com/ios-filled/50/000000/plus-math.png"
+           alt="Add" class="nav-icon" />
+      <img src="https://img.icons8.com/ios-filled/50/000000/bell.png"
+           alt="Notifications" class="nav-icon" />
+      <img src="https://img.icons8.com/ios-filled/50/000000/user-male-circle.png"
+           alt="Profile" class="nav-icon" />
+    </div>
+  </footer>
+
+</body>
+</html>
